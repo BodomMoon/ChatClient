@@ -18,3 +18,4 @@
 * Let certificate and port become configurable
 * Write the cmake file
 * Unit test
+* Disconnect auto closing
