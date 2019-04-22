@@ -1,0 +1,40 @@
+// This is Proto v3 syntax。
+syntax = "proto3";  
+// Those are belong to `protobuf` packet
+package protobuf;
+
+
+// Header 是用來包裝其他協議的標頭檔
+// uuid : 封包識別碼，由 client 產生，格式為
+//        username,month+day+time+second,00000(16進位)
+//        16^5 除以一秒一個請求可用 728 天
+// contain : 實際封包內容
+message Header {
+    string uuid = 1;
+    int32 code = 2;
+    oneof contain {
+        HeartBeat  heartBeat = 3;
+        SetNameReq setNameReq = 4;
+        MessageReq messageReq = 5;
+        MessageNotify messageNotify = 6;
+    }
+}
+
+// HeartBeat 心跳包
+message HeartBeat {
+}
+// SetNameReq 設定名稱
+message SetNameReq {
+    string username  = 1;
+}
+
+// MessageReq 訊息請求
+message MessageReq {
+    string message  = 1;
+}
+
+// MessageNotify 訊息廣播
+message MessageNotify {
+    string username =1;
+    string message = 2;
+}
